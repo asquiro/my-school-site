@@ -969,13 +969,13 @@ List<StudentDetails> getStudDet() {
   if (userInput.toLowerCase() == 'yes') {
     //  eligibleStud(myList);
     print('');
-    printResult(myList);
+    printUnPaidNames(myList);
     // elitVotz(myList);
     print('');
     print('do you need the list of paid students');
     String paidStud = stdin.readLineSync()!;
     if (paidStud == 'yes') {
-      elitVotz(myList);
+      printPaidNames(myList);
     }
     print('');
     print(
@@ -1028,11 +1028,6 @@ List<StudentDetails> elitVotz(List<StudentDetails> studDetails) {
   List<StudentDetails> elitList = studDetails
       .where((fee) => fee.feeStatus == 'paid')
       .toList();
-  for (var stud in elitList) {
-    // if (stud.feeStatus!.contains('paid')) {
-    //   elitList.add(stud);
-    print(stud.displayStatus());
-  }
   return elitList;
 }
 
@@ -1044,7 +1039,7 @@ List<StudentDetails> unEligibleVt(List<StudentDetails> studDetails) {
   return unPaidList;
 }
 
-void printResult(List<StudentDetails> list){
+void printPaidNames(List<StudentDetails> list){
   final myNewList = unEligibleVt(list);
   for(var newList in myNewList){
     print((newList.displayStatus()));
@@ -1052,13 +1047,9 @@ void printResult(List<StudentDetails> list){
 }
 
 
-// List<StudentDetails> notElizVotz(List<StudentDetails> studDetails) {
-//   List<StudentDetails> unpaidList = [];
-//   for (var stud in studDetails) {
-//     if (stud.feeStatus!.contains('not paid')) {
-//       unpaidList.add(stud);
-//     }
-//     print(stud.displayStatus());
-//   }
-//   return unpaidList;
-// }
+void printUnPaidNames(List<StudentDetails> list){
+  final myUnPaidList = elitVotz(list);
+  for(var list in myUnPaidList){
+    print(list.displayStatus());
+  }
+}

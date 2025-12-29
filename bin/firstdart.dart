@@ -1,4 +1,9 @@
-// // // import 'user_file.dart';
+import 'dart:async';
+import 'dart:io';
+
+import 'user_file.dart';
+import 'second.dart';
+
 // // // // import 'dart:io';
 // // // //
 // // // void main() {
@@ -915,141 +920,277 @@
 //         ' phoneNo: $phoneNumber, initialDeposit: $initialAmount, nin: $nin,';
 //   }
 // }
-import 'dart:io';
-import 'dart:math';
+// import 'dart:io';
+// import 'dart:math';
+//
+// List<StudentDetails> myList = [];
+// void main() {
+//   print('how many number of student do you want:');
+//   getStudDet();
+// }
+//
+// class StudentDetails {
+//   String? name;
+//   String? clas;
+//   int? age;
+//   String? feeStatus;
+//   StudentDetails({this.name, this.clas, this.age, this.feeStatus});
+//
+//   String outputStudent() {
+//     return 'student details are: name: $name, age: $age, class: $clas and fees status: $feeStatus';
+//   }
+//
+//   String displayStatus() {
+//     return 'students fee status are: name: $name, feeStatus: $feeStatus';
+//   }
+// }
+//
+// List<StudentDetails> getStudDet() {
+//   int? noOfStud = int.tryParse(stdin.readLineSync()!);
+//
+//   for (var i = 0; i < noOfStud!; i++) {
+//     print('Enter student ${i + 1} name:');
+//     String name = stdin.readLineSync()!;
+//     print('Enter student age:');
+//     int? age = int.tryParse(stdin.readLineSync()!);
+//     print('Enter class of student:');
+//     String clas = stdin.readLineSync()!;
+//     print('your fees status?');
+//     String? feeStat = stdin.readLineSync()!;
+//
+//     final studList = StudentDetails(
+//       name: name,
+//       age: age,
+//       clas: clas,
+//       feeStatus: feeStat,
+//     );
+//     myList.add(studList);
+//   }
+//   getList(myList);
+//   print('');
+//   print('want to see the list of unpaid student?');
+//   print('');
+//   String userInput = stdin.readLineSync()!;
+//   if (userInput.toLowerCase() == 'yes') {
+//     //  eligibleStud(myList);
+//     print('');
+//     printUnPaidNames(myList);
+//     // elitVotz(myList);
+//     print('');
+//     print('do you need the list of paid students');
+//     String paidStud = stdin.readLineSync()!;
+//     if (paidStud == 'yes') {
+//       printPaidNames(myList);
+//     }
+//     print('');
+//     print(
+//       'students who have paid can now vote while those who havent paid will not be allow to vote. '
+//       '\ncheck to see the electoral guideline',
+//     );
+//   } else {
+//     print('thank you for you answer');
+//   }
+//   return myList;
+// }
+//
+// void getList(List<StudentDetails> studList) {
+//   for (var student in studList) {
+//     print(student.outputStudent());
+//   }
+// }
+//
+//
+//
+// List<StudentDetails> elitVotz(List<StudentDetails> studDetails) {
+//   List<StudentDetails> elitList = studDetails
+//       .where((fee) => fee.feeStatus == 'paid')
+//       .toList();
+//   return elitList;
+// }
+//
+// // not paid function
+// List<StudentDetails> unEligibleVt(List<StudentDetails> studDetails) {
+//   List<StudentDetails> unPaidList = studDetails
+//       .where((fee) => fee.feeStatus == 'not paid')
+//       .toList();
+//   return unPaidList;
+// }
+//
+// void printPaidNames(List<StudentDetails> list){
+//   final myNewList = unEligibleVt(list);
+//   for(var newList in myNewList){
+//     print((newList.displayStatus()));
+//   }
+// }
+//
+//
+// void printUnPaidNames(List<StudentDetails> list){
+//   final myUnPaidList = elitVotz(list);
+//   for(var list in myUnPaidList){
+//     print(list.displayStatus());
+//   }
+// }
+List<Student> studentList = [];
+List<Teacher> teacherList = [];
 
-List<StudentDetails> myList = [];
 void main() {
-  print('how many number of student do you want:');
-  getStudDet();
+  print('select your options to get started:');
+  print('');
+  print('1: Register Student, 2: Enrol teachers, 3: vote your best teacher:');
+  String input = stdin.readLineSync()!;
+  if (input == '1') {
+    print('What no of student do you need for the vote?:');
+    print('');
+    studDetails(studentList);
+  } else if (input == '2') {
+    teacherReg(teacherList);
+  } else if (input == '3') {
+    //
+  }
+
+  studDetails(studentList);
 }
 
-class StudentDetails {
-  String? name;
-  String? clas;
-  int? age;
-  String? feeStatus;
-  StudentDetails({this.name, this.clas, this.age, this.feeStatus});
-
-  String outputStudent() {
-    return 'student details are: name: $name, age: $age, class: $clas and fees status: $feeStatus';
+List<Person> studDetails(List<Student> studentDetails) {
+  int? input = int.tryParse(stdin.readLineSync()!);
+  for (var i = 0; i < input!; i++) {
+    final student = Student();
+    print('enter student ${i + 1} name:');
+    String? studName = stdin.readLineSync()!;
+    student.name = studName;
+    print('enter RegNo:');
+    String? regNo = stdin.readLineSync()!;
+    student.regN = regNo;
+    print('enter Age:');
+    int? studAge = int.tryParse(stdin.readLineSync()!);
+    student.age = studAge!;
+    print('enter religion');
+    String religion = stdin.readLineSync()!;
+    student.religion = religion;
+    print('enter sex');
+    String studSex = stdin.readLineSync()!;
+    student.sex = studSex;
+    print('enter faculty:');
+    String faculty = stdin.readLineSync()!;
+    student.faculty = faculty;
+    print('enter your course of study:');
+    String course = stdin.readLineSync()!;
+    student.course = course;
+    studentDetails.add(student);
   }
-
-  String displayStatus() {
-    return 'students fee status are: name: $name, feeStatus: $feeStatus';
-  }
-}
-
-List<StudentDetails> getStudDet() {
-  int? noOfStud = int.tryParse(stdin.readLineSync()!);
-
-  for (var i = 0; i < noOfStud!; i++) {
-    print('Enter student ${i + 1} name:');
-    String name = stdin.readLineSync()!;
-    print('Enter student age:');
-    int? age = int.tryParse(stdin.readLineSync()!);
-    print('Enter class of student:');
-    String clas = stdin.readLineSync()!;
-    print('your fees status?');
-    String? feeStat = stdin.readLineSync()!;
-
-    final studList = StudentDetails(
-      name: name,
-      age: age,
-      clas: clas,
-      feeStatus: feeStat,
-    );
-    myList.add(studList);
-  }
-  getList(myList);
+  outPutStud(studentDetails);
   print('');
-  print('want to see the list of unpaid student?');
-  print('');
-  String userInput = stdin.readLineSync()!;
-  if (userInput.toLowerCase() == 'yes') {
-    //  eligibleStud(myList);
-    print('');
-    printUnPaidNames(myList);
-    // elitVotz(myList);
-    print('');
-    print('do you need the list of paid students');
-    String paidStud = stdin.readLineSync()!;
-    if (paidStud == 'yes') {
-      printPaidNames(myList);
-    }
-    print('');
-    print(
-      'students who have paid can now vote while those who havent paid will not be allow to vote. '
-      '\ncheck to see the electoral guideline',
-    );
+  print('2: Register teachers');
+  String answer = stdin.readLineSync()!;
+  if (answer == '2') {
+    teacherReg(teacherList);
   } else {
-    print('thank you for you answer');
+    print('invalid selection');
   }
-  return myList;
-}
-
-void getList(List<StudentDetails> studList) {
-  for (var student in studList) {
-    print(student.outputStudent());
+  print('enter 3: vote your best teacher:');
+  String data = stdin.readLineSync()!;
+  if (data == '3') {
+    voteTeachers(teacherList, studentList);
   }
+  return studentList;
 }
 
-// void outDetails(List<StudentDetails> studentDetails) {
-//   for (var stud in studentDetails) {
-//     stud.displayStatus();
-//   }
-// }
-
-// List<StudentDetails> eligibleStud(List<StudentDetails> studDetails) {
-//   List<StudentDetails> eligibleList = [];
-//   for (var student in studDetails) {
-//     if (student.feeStatus == 'paid') {
-//       eligibleList.add(student);
-//     }
-//     print(student.displayStatus());
-//   }
-//   return eligibleList;
-// }
-// outDetails(eligibleList);
-
-// List<StudentDetails> notEligibleStud(List<StudentDetails> studDetails) {
-//   print('list of not eligible student');
-//   List<StudentDetails> eligibleList = [];
-//   for (var stud in studDetails) {
-//     if (stud.feeStatus == 'not paid') {
-//       eligibleList.add(stud);
-//       print(stud.displayStatus());
-//     }
-//   }
-//   return eligibleList;
-// }
-
-List<StudentDetails> elitVotz(List<StudentDetails> studDetails) {
-  List<StudentDetails> elitList = studDetails
-      .where((fee) => fee.feeStatus == 'paid')
-      .toList();
-  return elitList;
-}
-
-// not paid function
-List<StudentDetails> unEligibleVt(List<StudentDetails> studDetails) {
-  List<StudentDetails> unPaidList = studDetails
-      .where((fee) => fee.feeStatus == 'not paid')
-      .toList();
-  return unPaidList;
-}
-
-void printPaidNames(List<StudentDetails> list){
-  final myNewList = unEligibleVt(list);
-  for(var newList in myNewList){
-    print((newList.displayStatus()));
+void outPutStud(List<Student> studentList) {
+  for (var student in studentList) {
+    print(student.displayStud());
   }
 }
 
+List<Teacher> teacherReg(List<Teacher> teachDetails) {
+  for (var i = 0; i < 4; i++) {
+    print('');
+    final teacher = Teacher();
+    print('teacher ${i + 1} enter your  name:');
+    String teacName = stdin.readLineSync()!;
+    teacher.name = teacName;
+    print('enter age:');
+    int? teacAge = int.tryParse(stdin.readLineSync()!);
+    teacher.age = teacAge!;
+    print('What is your gender?');
+    String teacGend = stdin.readLineSync()!;
+    teacher.sex = teacGend;
+    print('enter religion:');
+    String teachRel = stdin.readLineSync()!;
+    teacher.religion = teachRel;
+    print('enter course taught by teacher:');
+    String teacCour = stdin.readLineSync()!;
+    teacher.courseAllocation = teacCour;
+    print('enter your academic qualification');
+    String teachQual = stdin.readLineSync()!;
+    teacher.academicQual = teachQual;
+    teacherList.add(teacher);
+  }
+  displayTeacher(teacherList);
+  print('');
 
-void printUnPaidNames(List<StudentDetails> list){
-  final myUnPaidList = elitVotz(list);
-  for(var list in myUnPaidList){
-    print(list.displayStatus());
+  print('');
+  return teacherList;
+}
+
+void displayTeacher(List<Teacher> teacherList) {
+  for (var teacher in teacherList) {
+    print(teacher.displayTeacher());
   }
 }
+
+List<Teacher> voteTeachers(
+  List<Teacher> teacherList,
+  List<Student> studentList,
+) {
+  List<Teacher> votedTeacher = [];
+  List<int> studentVote = [];
+  for (var i = 0; i < 5; i++) {
+    print('Enter your name as student to vote:');
+    String? studName = stdin.readLineSync()!.trim();
+    Student? student;
+    try {
+      student = studentList.firstWhere((s) {
+        return s.name == studName;
+      });
+      if (student.voted == true) {
+        print('${student.name} has voted already}');
+      }
+    } catch (e) {
+      print('invalid student name');
+    }
+    print("Enter you favourite teacher's name");
+    String? teacherName = stdin.readLineSync()!;
+    Teacher? teacher;
+    try {
+      teacher = teacherList.firstWhere((t) {
+        return t.name == teacherName;
+      });
+      teacher.vote += 1;
+      studentVote.add(teacher.vote);
+    } catch (e) {
+      print('invalid teacher name');
+      return votedTeacher;
+    }
+    votedTeacher.add(teacher);
+    print('${student?.name} has voted for ${teacher.name}');
+    student?.voted = true;
+  }
+  electionResult(teacherList);
+  return votedTeacher;
+}
+
+void electionResult(List<Teacher> teacherList) {
+  if (teacherList.isEmpty) {
+    print('no teacher is available');
+  }
+  voteCount(teacherList);
+}
+
+void voteCount(List<Teacher> teacherList) {
+  teacherList.sort((a, b) => b.vote.compareTo(a.vote));
+  final sortedTeacherList = teacherList.take(3).toList();
+  for (var vote in sortedTeacherList) {
+    print(vote.voteResult());
+  }
+}
+
